@@ -85,7 +85,7 @@ function startRecording() {
 		recorder.onComplete = function (recorder, blob) {
 			/* __log("Encoding complete"); */
 			createDownloadLink(blob, recorder.encoding);
-			console.log("Blob cuando se detiene" + blob);
+			console.warn(blob);
 			dynamicBlob = blob;
 			encodingTypeSelect.disabled = false;
 		}
