@@ -1,6 +1,3 @@
-
-
-
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
@@ -51,7 +48,7 @@ function startRecording() {
 		audioContext = new AudioContext();
 
 		//update the format 
-		document.getElementById("formats").innerHTML = "Format: 2 channel " + encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value + " @ " + audioContext.sampleRate / 1000 + "kHz"
+		/* document.getElementById("formats").innerHTML = "Format: 2 channel " + encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value + " @ " + audioContext.sampleRate / 1000 + "kHz" */ // SE PUEDE BORRAR, INNECESARIO
 
 		//assign to gumStream for later use
 		gumStream = stream;
@@ -63,10 +60,10 @@ function startRecording() {
 		//input.connect(audioContext.destination)
 
 		//get the encoding 
-		encodingType = encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value;
+		encodingType = encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value; // SE PUEDE MODIFICAR Y SIMPLEMENTE PONER mp3
 
 		//disable the encoding selector
-		encodingTypeSelect.disabled = true;
+		encodingTypeSelect.disabled = true; // SE PUEDE BORRAR, INNECESARIO
 
 		recorder = new WebAudioRecorder(input, {
 			workerDir: "js/", // must end with slash
@@ -87,7 +84,7 @@ function startRecording() {
 			createDownloadLink(blob, recorder.encoding);
 			console.warn(blob);
 			dynamicBlob = blob;
-			encodingTypeSelect.disabled = false;
+			/* encodingTypeSelect.disabled = false; */ // SE PUEDE BORRAR, INNECESARIO
 		}
 
 		recorder.setOptions({
@@ -209,6 +206,9 @@ function sendAudio(conversationId, token, blob) {
 					const body = { "mediaIds": [media.id] }
 					const opts = { "useNormalizedMessage": false };
 
+					//Pausa 2 seg
+					setTimeout(() => {
+
 					// Send message
 					apiInstance.postConversationsMessageCommunicationMessages(conversationId, communicationId, body, opts)
 						.then((data) => {
@@ -218,7 +218,8 @@ function sendAudio(conversationId, token, blob) {
 							console.log("There was a failure calling postConversationsMessageCommunicationMessages");
 							console.error(err);
 						});
-
+						
+					}, 2000);
 				})
 				.catch((error) => {
 					console.error(`Conversation message was not send successfully`);
