@@ -84,6 +84,7 @@ function startRecording() {
 		recorder.onComplete = function (recorder, blob) {
 			/* __log("Encoding complete"); */
 			createDownloadLink(blob, recorder.encoding);
+			console.log (blob);
 			encodingTypeSelect.disabled = false;
 		}
 
