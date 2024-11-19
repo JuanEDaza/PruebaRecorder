@@ -39,10 +39,6 @@ audio {
   margin: 16px;
 }
 
-#waveCanvas{
-  background-color: white;
-}
-
 .fa-stop{
 color: red;
 }
