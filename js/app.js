@@ -1,29 +1,4 @@
-// Obtain a reference to the platformClient object
-const platformClient = require("platformClient");
-const api = platformClient.ApiClient.instance;
-api.setEnvironment(platformClient.PureCloudRegionHosts.sa_east_1);
 
-const searchParameters = new URLSearchParams(
-	location.search.slice(1) || location.hash.slice(1)
-);
-const conversationId = searchParameters.get("gcConversationId");
-const token = searchParameters.get("access_token");
-
-if (conversationId) {
-	localStorage.setItem('conversationIdCache', conversationId);
-	console.log('Inicial ' + conversationId);
-	alert('Inicial ' + conversationId);
-} else {
-	var conversationCache = localStorage.getItem('conversationIdCache');
-	console.log('Token: ' + token);
-	console.log('Recuperado ' + conversationCache);
-	alert('Recuperado: ' + conversationCache + '\n\nToken: ' + token);
-}
-
-api.loginImplicitGrant(
-	"eff0ef76-cf9f-4556-8600-a175afe307f2",
-	"https://juanedaza.github.io/PruebaRecorder/"
-)
 
 
 //webkitURL is deprecated but nevertheless
