@@ -33,7 +33,7 @@ function startRecording() {
 	*/
 
 	var constraints = { audio: true, video: false }
-
+	console.log("Parada 1")
 	/*
 		We're using the standard promise based getUserMedia() 
 		https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
@@ -52,6 +52,7 @@ function startRecording() {
 
 		//update the format 
 		document.getElementById("formats").innerHTML = "Format: 2 channel " + encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value + " @ " + audioContext.sampleRate / 1000 + "kHz"
+		console.log("Parada 2")
 
 		//assign to gumStream for later use
 		gumStream = stream;
@@ -105,7 +106,7 @@ function startRecording() {
 		recordButton.disabled = false;
 		stopButton.disabled = true;
 		sendButton.disabled = true;
-
+		console.log('Error:', err)
 	});
 
 	//disable the record button
