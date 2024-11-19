@@ -72,7 +72,7 @@ function startRecording() {
 	recordButton.disabled = true;
 	stopButton.disabled = false;
 	recordingsList.innerHTML = "";
-	/* sendButton.style.display = "none"; */
+	sendButton.style.display = "none";
 }
 
 function stopRecording() {
@@ -85,7 +85,7 @@ function stopRecording() {
 	stopButton.disabled = true;
 	recordButton.disabled = false;
 	sendButton.disabled = false;
-	sendButton.style.display = "block";
+	/* sendButton.style.display = "block"; */
 
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
@@ -114,12 +114,12 @@ function createDownloadLink(blob, encoding) {
 		// Agrega los elementos al contenedor
 		recordingsList.innerHTML = ""; // Limpia cualquier contenido previo
 		recordingsList.appendChild(au);
-		sendButton.style.display = "none";
+		sendButton.style.display = "block";
 		/* recordingsList.appendChild(link); */
 	} else {
 		// Si ya existen, actualiza sus propiedades
 		existingAudio.src = url;
-		sendButton.style.display = "none";
+		sendButton.style.display = "block";
 		/* existingLink.href = url;
 		existingLink.download = new Date().toISOString() + '.' + encoding;
 		existingLink.innerHTML = existingLink.download; */
