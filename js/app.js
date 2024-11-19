@@ -33,7 +33,6 @@ function startRecording() {
 	*/
 
 	var constraints = { audio: true, video: false }
-	console.log("Parada 1")
 	/*
 		We're using the standard promise based getUserMedia() 
 		https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
@@ -52,7 +51,6 @@ function startRecording() {
 
 		//update the format 
 		document.getElementById("formats").innerHTML = "Format: 2 channel " + encodingTypeSelect.options[encodingTypeSelect.selectedIndex].value + " @ " + audioContext.sampleRate / 1000 + "kHz"
-		console.log("Parada 2")
 
 		//assign to gumStream for later use
 		gumStream = stream;
@@ -106,7 +104,7 @@ function startRecording() {
 		recordButton.disabled = false;
 		stopButton.disabled = true;
 		sendButton.disabled = true;
-		console.log('Error:', err)
+		console.log('Error:', err);
 	});
 
 	//disable the record button
@@ -131,31 +129,6 @@ function stopRecording() {
 
 	/* __log('Recording stopped'); */
 }
-
-// Función original de la librería (Crea una lista con cada grabación)
-/* function createDownloadLink(blob,encoding) {
-	
-	var url = URL.createObjectURL(blob);
-	var au = document.createElement('audio');
-	var li = document.createElement('li');
-	var link = document.createElement('a');
-
-	//add controls to the <audio> element
-	au.controls = true;
-	au.src = url;
-
-	//link the a element to the blob
-	link.href = url;
-	link.download = new Date().toISOString() + '.'+encoding;
-	link.innerHTML = link.download;
-
-	//add the new audio and a elements to the li element
-	li.appendChild(au);
-	li.appendChild(link);
-
-	//add the li element to the ordered list
-	recordingsList.appendChild(li);
-} */
 
 // Función modificada para evitar crear una lista y reemplazar el elemento existente
 function createDownloadLink(blob, encoding) {
@@ -199,7 +172,7 @@ function createDownloadLink(blob, encoding) {
 // Función asíncrona que envía el mensaje a Genesys
 async function sendMessage() {
 	try {
-		sendAudio(conversationCache, token); // Envía el mensaje mediante las API de Genesys
+		sendAudio(conversationCache, token, blob); // Envía el mensaje mediante las API de Genesys
 		console.log('Audio enviado exitosamente a la API y descargado');
 	} catch (error) {
 		console.error('Error:', error);
@@ -208,7 +181,7 @@ async function sendMessage() {
 }
 
 // Función que utiliza las API para contruir el archivo
-function sendAudio(conversationId, token) {
+function sendAudio(conversationId, token, blob) {
 	let apiInstance = new platformClient.ConversationsApi();
 
 	// Get conversation
@@ -228,7 +201,7 @@ function sendAudio(conversationId, token) {
 					console.info('URL del media: ' + uploadUrl) // Se puede eliminar
 					console.log('Token: ' + token)
 					console.log('Record blob: ' + blob);
-					uploadAttachment(uploadUrl, token);
+					uploadAttachment(uploadUrl, token, blob);
 
 					const body = { "mediaIds": [media.id] }
 					const opts = { "useNormalizedMessage": false };
@@ -269,7 +242,7 @@ function searchCommunicationId(conversationList) {
 	return variable;
 }
 
-function uploadAttachment(uploadUrl, authToken) {
+function uploadAttachment(uploadUrl, authToken, blob) {
 	var form = new FormData();
 	form.append('file', blob, 'record.mp3');
 
