@@ -9,6 +9,7 @@ var recorder; 						//WebAudioRecorder object
 var input; 							//MediaStreamAudioSourceNode  we'll be recording
 var encodingType; 					//holds selected encoding for resulting audio (file)
 var encodeAfterRecord = true;       // when to encode
+var dynamicBlob;
 
 // shim for AudioContext when it's not avb. 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -85,6 +86,7 @@ function startRecording() {
 			/* __log("Encoding complete"); */
 			createDownloadLink(blob, recorder.encoding);
 			console.log("Blob cuando se detiene" + blob);
+			dynamicBlob = blob;
 			encodingTypeSelect.disabled = false;
 		}
 
@@ -116,8 +118,6 @@ function startRecording() {
 
 function stopRecording() {
 	console.log("stopRecording() called");
-	console.log(blob);
-
 
 	//stop microphone access
 	gumStream.getAudioTracks()[0].stop();
@@ -175,7 +175,7 @@ function createDownloadLink(blob, encoding) {
 // Función asíncrona que envía el mensaje a Genesys
 async function sendMessage() {
 	try {
-		sendAudio(conversationCache, token, blob); // Envía el mensaje mediante las API de Genesys
+		sendAudio(conversationCache, token, dynamicBlob); // Envía el mensaje mediante las API de Genesys
 		console.log('Audio enviado exitosamente a la API y descargado');
 	} catch (error) {
 		console.error('Error:', error);
@@ -204,7 +204,7 @@ function sendAudio(conversationId, token, blob) {
 					console.info('URL del media: ' + uploadUrl) // Se puede eliminar
 					console.log('Token: ' + token)
 					console.log('Record blob: ' + blob);
-					uploadAttachment(uploadUrl, token, blob);
+					uploadAttachment(uploadUrl, token, dynamicBlob);
 
 					const body = { "mediaIds": [media.id] }
 					const opts = { "useNormalizedMessage": false };
