@@ -34,11 +34,13 @@
 		<button id="stopButton" class="button" disabled>Detener</button>
 	</div>
 
-	<div id="recordingsList"></div>
-	<div class="controls">
-		<button id="sendButton" class="button" style="display: none;" disabled>Enviar</button>
+	<div id="recordingsList">
+		<audio src="" controls></audio>
 	</div>
-
+	<div class="controls">
+		<button id="sendButton" class="button" style="display: none" disabled>Enviar</button>
+	</div>
+	
 	<script src="js/WebAudioRecorder.min.js"></script>
 	<script src="js/app.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -66,10 +68,10 @@
 			alert('Recuperado: ' + conversationCache + '\n\nToken: ' + token);
 		}
 
-		api.loginImplicitGrant(
+		/* api.loginImplicitGrant(
 			"eff0ef76-cf9f-4556-8600-a175afe307f2",
 			"https://juanedaza.github.io/PruebaRecorder/"
-		)
+		) */
 	</script>
 
 </body>

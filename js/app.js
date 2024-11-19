@@ -72,7 +72,7 @@ function startRecording() {
 	recordButton.disabled = true;
 	stopButton.disabled = false;
 	recordingsList.innerHTML = "";
-	sendButton.style.display = "none";
+	/* sendButton.style.display = "none"; */
 }
 
 function stopRecording() {
@@ -114,10 +114,12 @@ function createDownloadLink(blob, encoding) {
 		// Agrega los elementos al contenedor
 		recordingsList.innerHTML = ""; // Limpia cualquier contenido previo
 		recordingsList.appendChild(au);
+		sendButton.style.display = "none";
 		/* recordingsList.appendChild(link); */
 	} else {
 		// Si ya existen, actualiza sus propiedades
 		existingAudio.src = url;
+		sendButton.style.display = "none";
 		/* existingLink.href = url;
 		existingLink.download = new Date().toISOString() + '.' + encoding;
 		existingLink.innerHTML = existingLink.download; */
