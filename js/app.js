@@ -84,7 +84,7 @@ function startRecording() {
 		recorder.onComplete = function (recorder, blob) {
 			/* __log("Encoding complete"); */
 			createDownloadLink(blob, recorder.encoding);
-			console.log (blob);
+			console.log("Blob cuando se detiene" + blob);
 			encodingTypeSelect.disabled = false;
 		}
 
@@ -116,6 +116,8 @@ function startRecording() {
 
 function stopRecording() {
 	console.log("stopRecording() called");
+	console.log(blob);
+
 
 	//stop microphone access
 	gumStream.getAudioTracks()[0].stop();
