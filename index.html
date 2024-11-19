@@ -11,25 +11,38 @@
 </head>
 
 <body>
+	<div class="title-container">
+		<img src="https://i0.wp.com/www.districosmeticos.com/wp-content/uploads/2022/05/Sistecredito.png?w=370&ssl=1"
+			alt="Sistecredito" width="200">
+		<img
+			src="https://cdn-hjhjb.nitrocdn.com/cZXOmaOnBzchEVsoklMbKZDzVVPPjcww/assets/images/optimized/rev-5cfca33/www.informationsys.com/wp-content/uploads/2021/11/cropped-cropped-Icon_information-192x192.png"
+			alt="Infosys" width="60">
+	</div>
+
+	<select id="encodingTypeSelect" disabled hidden>
+		<!-- <option value="wav">Waveform Audio (.wav)</option> -->
+		<option value="mp3" selected>MP3 (MPEG-1 Audio Layer III) (.mp3)</option>
+		<!-- <option value="ogg">Ogg Vorbis (.ogg)</option> -->
+	</select>
+
 	<div>
-		<p>Convert recorded audio to:</p>
-		<select id="encodingTypeSelect" disabled>
-			<!-- <option value="wav">Waveform Audio (.wav)</option> -->
-			<option value="mp3" selected>MP3 (MPEG-1 Audio Layer III) (.mp3)</option>
-			<!-- <option value="ogg">Ogg Vorbis (.ogg)</option> -->
-		</select>
-		<div id="controls">
-			<button id="recordButton">Grabar</button>
-			<button id="stopButton" disabled>Detener</button>
-			<button id="sendButton" disabled>Enviar</button>
-		</div>
-		<div id="formats"></div>
-		<!-- 		<pre>Log</pre>
+		<p id="timer">00:00</p>
+	</div>
+	
+	<div class="controls">
+		<button id="recordButton" class="button">Grabar</button>
+		<button id="stopButton" class="button" disabled>Detener</button>
+	</div>
+	<div class="controls">
+		<button id="sendButton" class="button" disabled>Enviar</button>
+	</div>
+
+	<!-- <div id="formats"></div>
+				<pre>Log</pre>
 		<pre id="log"></pre> -->
 
-		<pre>Grabación</pre>
-		<ol id="recordingsList"></ol>
-	</div>
+	<!-- <pre>Grabación</pre> -->
+	<div id="recordingsList"></div>
 
 	<script src="js/WebAudioRecorder.min.js"></script>
 	<script src="js/app.js"></script>
@@ -58,10 +71,10 @@
 			alert('Recuperado: ' + conversationCache + '\n\nToken: ' + token);
 		}
 
-		api.loginImplicitGrant(
+		/* api.loginImplicitGrant(
 			"eff0ef76-cf9f-4556-8600-a175afe307f2",
 			"https://juanedaza.github.io/PruebaRecorder/"
-		)
+		) */
 	</script>
 
 </body>

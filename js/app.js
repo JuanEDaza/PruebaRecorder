@@ -7,6 +7,8 @@ var input; 							//MediaStreamAudioSourceNode  we'll be recording
 var encodingType; 					//holds selected encoding for resulting audio (file)
 var encodeAfterRecord = true;       // when to encode
 var dynamicBlob;
+let timer;
+let seconds = 0;
 
 // shim for AudioContext when it's not avb. 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -96,6 +98,7 @@ function startRecording() {
 
 		//start the recording process
 		recorder.startRecording();
+		startTimer();
 
 		/* __log("Recording started"); */
 
@@ -110,7 +113,7 @@ function startRecording() {
 	//disable the record button
 	recordButton.disabled = true;
 	stopButton.disabled = false;
-	sendButton.disabled = false;
+	/* sendButton.disabled = false; */
 }
 
 function stopRecording() {
@@ -126,6 +129,7 @@ function stopRecording() {
 
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
+	stopTimer();
 
 	/* __log('Recording stopped'); */
 }
@@ -167,6 +171,20 @@ function createDownloadLink(blob, encoding) {
 	log.innerHTML += "\n" + e + " " + (data || '');
 } */
 
+function startTimer() {
+	timer = setInterval(() => {
+		seconds++;
+		const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
+		const secs = (seconds % 60).toString().padStart(2, '0');
+		timerDisplay.textContent = `${minutes}:${secs}`;
+	}, 1000);
+}
+
+function stopTimer() {
+	clearInterval(timer);
+	seconds = 0;
+	timerDisplay.textContent = '00:00';
+}
 
 
 // Función asíncrona que envía el mensaje a Genesys
@@ -206,20 +224,18 @@ function sendAudio(conversationId, token, blob) {
 					const body = { "mediaIds": [media.id] }
 					const opts = { "useNormalizedMessage": false };
 
-					//Pausa 2 seg
+					//Pausa 1 seg
 					setTimeout(() => {
-
-					// Send message
-					apiInstance.postConversationsMessageCommunicationMessages(conversationId, communicationId, body, opts)
-						.then((data) => {
-							console.log(`postConversationsMessageCommunicationMessages success!`);
-						})
-						.catch((err) => {
-							console.log("There was a failure calling postConversationsMessageCommunicationMessages");
-							console.error(err);
-						});
-						
-					}, 2000);
+						// Send message
+						apiInstance.postConversationsMessageCommunicationMessages(conversationId, communicationId, body, opts)
+							.then((data) => {
+								console.log(`postConversationsMessageCommunicationMessages success!`);
+							})
+							.catch((err) => {
+								console.log("There was a failure calling postConversationsMessageCommunicationMessages");
+								console.error(err);
+							});
+					}, 1000);
 				})
 				.catch((error) => {
 					console.error(`Conversation message was not send successfully`);
