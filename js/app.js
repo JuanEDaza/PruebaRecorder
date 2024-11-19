@@ -59,6 +59,7 @@ function startRecording() {
 		//start the recording process
 		recorder.startRecording();
 		startTimer();
+		startWaveVisualization();
 
 	}).catch(function (err) {
 		//enable the record button if getUSerMedia() fails
@@ -277,6 +278,7 @@ function drawWave() {
 
 	// Obtener los datos del analizador
 	analyser.getByteTimeDomainData(dataArray);
+	console.log(dataArray);
 
 	// Dibujar la onda
 	waveCtx.lineWidth = 2;
@@ -307,7 +309,7 @@ function drawWave() {
 }
 
 // Inicia la visualización al comenzar la grabación
-recordButton.addEventListener("click", startWaveVisualization);
+/* recordButton.addEventListener("click", startWaveVisualization); */
 
 // Ajustar tamaño del canvas al redimensionar la ventana
 window.addEventListener("resize", () => {
