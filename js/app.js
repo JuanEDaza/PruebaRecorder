@@ -74,7 +74,7 @@ function startRecording() {
 	stopButton.disabled = false;
 	recordingsList.innerHTML = "";
 	sendButton.style.display = "none";
-	/* waveCanvas.style.display = "block"; */
+	waveCanvas.style.display = "block";
 }
 
 function stopRecording() {
@@ -91,7 +91,7 @@ function stopRecording() {
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
 	stopTimer();
-	/* waveCanvas.style.display = "none"; */
+	waveCanvas.style.display = "none";
 }
 
 // Función modificada para evitar crear una lista y reemplazar el elemento existente
@@ -244,8 +244,8 @@ const waveCanvas = document.getElementById('waveCanvas');
 const waveCtx = waveCanvas.getContext('2d');
 
 // Configurar el tamaño del canvas
-waveCanvas.width = window.innerWidth;
-waveCanvas.height = 150;
+waveCanvas.width = document.body.clientWidth;
+waveCanvas.height = 100;
 
 // Configuración del AnalyserNode
 let analyser;
@@ -278,7 +278,6 @@ function drawWave() {
 
 	// Obtener los datos del analizador
 	analyser.getByteTimeDomainData(dataArray);
-	console.log(dataArray);
 
 	// Dibujar la onda
 	waveCtx.lineWidth = 2;
@@ -313,8 +312,8 @@ function drawWave() {
 
 // Ajustar tamaño del canvas al redimensionar la ventana
 window.addEventListener("resize", () => {
-	waveCanvas.width = window.innerWidth;
-	waveCanvas.height = 150;
+	waveCanvas.width = document.body.clientWidth;
+	waveCanvas.height = 100;
 });
 
 /*----------------- ↑ CONFIGURACIÓN DE LAS WAVES DE AUDIO ↑ -----------------*/

@@ -7,6 +7,7 @@
 	<title>Audio Recording</title>
 	<link rel="icon" href="https://cdn-hjhjb.nitrocdn.com/cZXOmaOnBzchEVsoklMbKZDzVVPPjcww/assets/images/optimized/rev-5cfca33/www.informationsys.com/wp-content/uploads/2021/11/cropped-cropped-Icon_information-192x192.png" type="image/x-icon">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -25,21 +26,21 @@
 		<!-- <option value="ogg">Ogg Vorbis (.ogg)</option> -->
 	</select>
 
-	<canvas id="waveCanvas"></canvas>
-
-	<div>
+	<div id="container-timer">
 		<p id="timer">00:00</p>
+		<canvas id="waveCanvas" style="display: none;"></canvas>
 	</div>
-	
+
 	<div class="controls">
-		<button id="recordButton" class="button">Grabar</button>
-		<button id="stopButton" class="button" disabled>Detener</button>
+
+		<button id="recordButton" class="button"><i class="fa-solid fa-microphone"></i> Grabar</button>
+		<button id="stopButton" class="button" disabled><i class="fa-solid fa-stop"></i> Detener</button>
 	</div>
 
 	<div id="recordingsList"></div>
 
 	<div class="controls">
-		<button id="sendButton" class="button" style="display: none" disabled>Enviar</button>
+		<button id="sendButton" class="button" style="display: block" disabled><i class="fa-solid fa-paper-plane"></i> Enviar</button>
 	</div>
 	
 	<script src="js/WebAudioRecorder.min.js"></script>

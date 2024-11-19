@@ -25,17 +25,34 @@ audio {
   color: white;
   font-size: 3rem;
   text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
-  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 0px;
 }
 
 .controls{
   display: flex;
   justify-content: space-around;
-  margin-bottom: 1rem; /* 1rem = 16px */
+  margin-top: 1rem; /* 1rem = 16px */
 }
 
 #recordingsList{
   margin: 16px;
+}
+
+#waveCanvas{
+  background-color: white;
+}
+
+.fa-stop{
+color: red;
+}
+
+.fa-microphone{
+  color: #00b7ff;
+}
+
+.fa-paper-plane{
+  color: rgb(0, 255, 0);
 }
 
 
@@ -66,7 +83,8 @@ audio {
 .button:hover {
   box-shadow: 0 0.5em 1.5em -0.5em #3b82f6;
   outline: none;
-  background: #92c83e;
+  /* background: #92c83e; */
+  background: linear-gradient(90deg,#52708a 0,#020024 50%,#52708a 100%);
   border-top-left-radius: 40px;
   border-bottom-right-radius: 40px;
 }
@@ -77,7 +95,7 @@ audio {
 
 button:disabled {
   pointer-events: none;
-  background: lightgray;
+  background: linear-gradient(90deg,#020024 0,#52708a 50%,#020024 100%);
 }
 
 .button::before {
