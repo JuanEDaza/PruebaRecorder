@@ -4,9 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 
-	<title>Audio Recording Demo With WebAudioRecorder.js - addpipe.com</title>
+	<title>Audio Recording</title>
+	<link rel="icon" href="https://cdn-hjhjb.nitrocdn.com/cZXOmaOnBzchEVsoklMbKZDzVVPPjcww/assets/images/optimized/rev-5cfca33/www.informationsys.com/wp-content/uploads/2021/11/cropped-cropped-Icon_information-192x192.png" type="image/x-icon">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -25,6 +25,8 @@
 		<!-- <option value="ogg">Ogg Vorbis (.ogg)</option> -->
 	</select>
 
+	<canvas id="waveCanvas" style="display: none"></canvas>
+
 	<div>
 		<p id="timer">00:00</p>
 	</div>
@@ -34,9 +36,8 @@
 		<button id="stopButton" class="button" disabled>Detener</button>
 	</div>
 
-	<div id="recordingsList">
-		<audio src="" controls></audio>
-	</div>
+	<div id="recordingsList"></div>
+
 	<div class="controls">
 		<button id="sendButton" class="button" style="display: none" disabled>Enviar</button>
 	</div>
@@ -68,10 +69,10 @@
 			alert('Recuperado: ' + conversationCache + '\n\nToken: ' + token);
 		}
 
-		api.loginImplicitGrant(
+		/* api.loginImplicitGrant(
 			"eff0ef76-cf9f-4556-8600-a175afe307f2",
 			"https://juanedaza.github.io/PruebaRecorder/"
-		)
+		) */
 	</script>
 
 </body>

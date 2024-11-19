@@ -68,11 +68,12 @@ function startRecording() {
 		console.log('Error:', err);
 	});
 
-	//disable the record button
+	//disable the buttons
 	recordButton.disabled = true;
 	stopButton.disabled = false;
 	recordingsList.innerHTML = "";
 	sendButton.style.display = "none";
+	waveCanvas.style.display = "block";
 }
 
 function stopRecording() {
@@ -85,18 +86,18 @@ function stopRecording() {
 	stopButton.disabled = true;
 	recordButton.disabled = false;
 	sendButton.disabled = false;
-	/* sendButton.style.display = "block"; */
 
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
 	stopTimer();
+	waveCanvas.style.display = "none";
 }
 
 // Función modificada para evitar crear una lista y reemplazar el elemento existente
 function createDownloadLink(blob, encoding) {
 	var url = URL.createObjectURL(blob);
 	var existingAudio = recordingsList.querySelector('audio');
-	var existingLink = recordingsList.querySelector('a');
+	/* var existingLink = recordingsList.querySelector('a'); */
 
 	if (!existingAudio || !existingLink) {
 		// Si no existen, crea los elementos
@@ -234,3 +235,84 @@ function uploadAttachment(uploadUrl, authToken, blob) {
 		data: form
 	});
 }
+
+
+/*----------------- ↓ CONFIGURACIÓN DE LAS WAVES DE AUDIO ↓ -----------------*/
+
+const waveCanvas = document.getElementById('waveCanvas');
+const waveCtx = waveCanvas.getContext('2d');
+
+// Configurar el tamaño del canvas
+waveCanvas.width = window.innerWidth;
+waveCanvas.height = 150;
+
+// Configuración del AnalyserNode
+let analyser;
+let dataArray;
+
+// Inicia la visualización de las ondas
+function startWaveVisualization() {
+	if (!audioContext || !gumStream) {
+		console.error("AudioContext o stream no disponibles");
+		return;
+	}
+
+	// Configurar el nodo analizador
+	analyser = audioContext.createAnalyser();
+	analyser.fftSize = 2048;
+	const bufferLength = analyser.frequencyBinCount;
+	dataArray = new Uint8Array(bufferLength);
+
+	// Conectar el micrófono al analizador
+	const input = audioContext.createMediaStreamSource(gumStream);
+	input.connect(analyser);
+
+	// Iniciar animación
+	drawWave();
+}
+
+function drawWave() {
+	// Limpiar el canvas
+	waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+
+	// Obtener los datos del analizador
+	analyser.getByteTimeDomainData(dataArray);
+
+	// Dibujar la onda
+	waveCtx.lineWidth = 2;
+	waveCtx.strokeStyle = "rgb(0, 123, 255)";
+	waveCtx.beginPath();
+
+	const sliceWidth = waveCanvas.width / dataArray.length;
+	let x = 0;
+
+	for (let i = 0; i < dataArray.length; i++) {
+		const v = dataArray[i] / 128.0;
+		const y = (v * waveCanvas.height) / 2;
+
+		if (i === 0) {
+			waveCtx.moveTo(x, y);
+		} else {
+			waveCtx.lineTo(x, y);
+		}
+
+		x += sliceWidth;
+	}
+
+	waveCtx.lineTo(waveCanvas.width, waveCanvas.height / 2);
+	waveCtx.stroke();
+
+	// Continuar la animación
+	requestAnimationFrame(drawWave);
+}
+
+// Inicia la visualización al comenzar la grabación
+recordButton.addEventListener("click", startWaveVisualization);
+
+// Ajustar tamaño del canvas al redimensionar la ventana
+window.addEventListener("resize", () => {
+	waveCanvas.width = window.innerWidth;
+	waveCanvas.height = 150;
+});
+
+/*----------------- ↑ CONFIGURACIÓN DE LAS WAVES DE AUDIO ↑ -----------------*/
