@@ -9,11 +9,6 @@ audio {
   width: 100%;
 }
 
-canvas {
-  width: 100vw;
-  height: 100vh;
-}
-
 .title-container {
   display: flex;
   justify-content: space-between;

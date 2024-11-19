@@ -73,7 +73,7 @@ function startRecording() {
 	stopButton.disabled = false;
 	recordingsList.innerHTML = "";
 	sendButton.style.display = "none";
-	waveCanvas.style.display = "block";
+	/* waveCanvas.style.display = "block"; */
 }
 
 function stopRecording() {
@@ -90,7 +90,7 @@ function stopRecording() {
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
 	stopTimer();
-	waveCanvas.style.display = "none";
+	/* waveCanvas.style.display = "none"; */
 }
 
 // Función modificada para evitar crear una lista y reemplazar el elemento existente
