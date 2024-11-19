@@ -18,7 +18,8 @@ var encodingTypeSelect = document.getElementById("encodingTypeSelect");
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 var sendButton = document.getElementById("sendButton");
-const timerDisplay = document.getElementById('timer');
+const timerDisplay = document.getElementById("timer");
+const loading = document.getElementById("loading");
 
 //add events to those 3 buttons
 recordButton.addEventListener("click", startRecording);
@@ -87,6 +88,7 @@ function stopRecording() {
 	stopButton.disabled = true;
 	recordButton.disabled = false;
 	sendButton.disabled = false;
+	loading.style.display = "block";
 
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
@@ -116,11 +118,13 @@ function createDownloadLink(blob, encoding) {
 		// Agrega los elementos al contenedor
 		recordingsList.innerHTML = ""; // Limpia cualquier contenido previo
 		recordingsList.appendChild(au);
+		loading.style.display = "none";
 		sendButton.style.display = "block";
 		/* recordingsList.appendChild(link); */
 	} else {
 		// Si ya existen, actualiza sus propiedades
 		existingAudio.src = url;
+		loading.style.display = "none";
 		sendButton.style.display = "block";
 		/* existingLink.href = url;
 		existingLink.download = new Date().toISOString() + '.' + encoding;
