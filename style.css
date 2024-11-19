@@ -43,7 +43,7 @@ audio {
   font-family: inherit;
   font-weight: 500;
   font-size: 17px;
-  padding: 12px 20px;
+  padding: 12px 50px;
   color: white;
   background: linear-gradient(90deg,#020024 0,#52708a 50%,#020024 100%);
   /* border: none; */
