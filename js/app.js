@@ -64,15 +64,15 @@ function startRecording() {
 
 	}).catch(function (err) {
 		//enable the record button if getUSerMedia() fails
-		recordButton.disabled = false;
-		stopButton.disabled = true;
-		sendButton.disabled = true;
+		recordButton.style.display = "block";
+		stopButton.style.display = "none";
+		sendButton.style.display = "none";
 		console.log('Error:', err);
 	});
 
 	//disable the buttons
-	recordButton.disabled = true;
-	stopButton.disabled = false;
+	recordButton.style.display = "block";
+	stopButton.style.display = "block";
 	recordingsList.innerHTML = "";
 	sendButton.style.display = "none";
 	waveCanvas.style.display = "block";
@@ -85,9 +85,9 @@ function stopRecording() {
 	gumStream.getAudioTracks()[0].stop();
 
 	//disable the buttons
-	stopButton.disabled = true;
-	recordButton.disabled = false;
-	sendButton.disabled = false;
+	stopButton.style.display = "none";
+	recordButton.style.display = "block";
+	sendButton.style.display = "block";
 	loading.style.display = "block";
 
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)

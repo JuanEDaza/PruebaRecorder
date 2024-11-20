@@ -71,11 +71,6 @@ color: red;
   /* margin: 0px 30px; */
 }
 
-.button svg {
-  margin-right: 8px;
-  width: 25px;
-}
-
 .button:hover {
   box-shadow: 0 0.5em 1.5em -0.5em #3b82f6;
   outline: none;
@@ -89,10 +84,9 @@ color: red;
   box-shadow: 0 0.3em 1em -0.5em #3b82f6;
 }
 
-button:disabled {
+/* button:disabled {
   pointer-events: none;
-  background: linear-gradient(90deg,#020024 0,#52708a 50%,#020024 100%);
-}
+} */
 
 .button::before {
   content: "";
@@ -143,7 +137,7 @@ button:disabled {
 
 
 #loading{
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 /* --------------- ↓ Estilos "loading" ↓ --------------- */

@@ -32,9 +32,8 @@
 	</div>
 
 	<div class="controls">
-
-		<button id="recordButton" class="button"><i class="fa-solid fa-microphone"></i> Grabar</button>
-		<button id="stopButton" class="button" disabled><i class="fa-solid fa-stop"></i> Detener</button>
+		<button id="recordButton" class="button" style="display: block;"><i class="fa-solid fa-microphone"></i> Grabar</button>
+		<button id="stopButton" class="button" style="display: none;"><i class="fa-solid fa-stop"></i> Detener</button>
 	</div>
 
 	<div id="loading" style="display: none;">
@@ -50,7 +49,7 @@
 	<div id="recordingsList"></div>
 
 	<div class="controls">
-		<button id="sendButton" class="button" style="display: none" disabled><i class="fa-solid fa-paper-plane"></i> Enviar</button>
+		<button id="sendButton" class="button" style="display: none"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
 	</div>
 	
 	<script src="js/WebAudioRecorder.min.js"></script>
