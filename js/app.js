@@ -70,8 +70,8 @@ function startRecording() {
 		console.log('Error:', err);
 	});
 
-	//disable the buttons
-	recordButton.style.display = "block";
+	//Hide the buttons
+	recordButton.style.display = "none";
 	stopButton.style.display = "block";
 	recordingsList.innerHTML = "";
 	sendButton.style.display = "none";
@@ -84,15 +84,15 @@ function stopRecording() {
 	//stop microphone access
 	gumStream.getAudioTracks()[0].stop();
 
-	//disable the buttons
+	//Hide the buttons
 	stopButton.style.display = "none";
 	recordButton.style.display = "block";
 	sendButton.style.display = "block";
-	loading.style.display = "block";
 
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
 	stopTimer();
+	loading.style.display = "block";
 	waveCanvas.style.display = "none";
 }
 
