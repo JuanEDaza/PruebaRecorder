@@ -86,8 +86,6 @@ function stopRecording() {
 
 	//Hide the buttons
 	stopButton.style.display = "none";
-	recordButton.style.display = "block";
-	sendButton.style.display = "none";
 
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
@@ -118,12 +116,14 @@ function createDownloadLink(blob, encoding) {
 		// Agrega los elementos al contenedor
 		recordingsList.innerHTML = ""; // Limpia cualquier contenido previo
 		recordingsList.appendChild(au);
+		recordButton.style.display = "block";
 		loading.style.display = "none";
 		sendButton.style.display = "block";
 		/* recordingsList.appendChild(link); */
 	} else {
 		// Si ya existen, actualiza sus propiedades
 		existingAudio.src = url;
+		recordButton.style.display = "block";
 		loading.style.display = "none";
 		sendButton.style.display = "block";
 		/* existingLink.href = url;
