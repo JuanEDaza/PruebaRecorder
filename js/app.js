@@ -87,7 +87,7 @@ function stopRecording() {
 	//Hide the buttons
 	stopButton.style.display = "none";
 	recordButton.style.display = "block";
-	sendButton.style.display = "block";
+	sendButton.style.display = "none";
 
 	//tell the recorder to finish the recording (stop recording + encode the recorded audio)
 	recorder.finishRecording();
